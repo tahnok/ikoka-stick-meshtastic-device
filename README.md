@@ -123,3 +123,7 @@ The XIAO module is intended to be socketed with pin headers/pin sockets, to allo
 ![animation](https://ndoo.github.io/ikoka-stick-meshtastic-device/rotating.gif)
 
 (Rendered with [kicad-render](https://github.com/linalinn/kicad-render).)
+
+# GOME Notes
+
+If you want to generate this again, you need to install the [Microgramma](https://en.wikipedia.org/wiki/Microgramma_(typeface)) font, I got it [here](https://fontsgeek.com/fonts/Microgramma-D-Extended-Bold)
