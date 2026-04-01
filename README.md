@@ -1,5 +1,9 @@
 # Ikoka Stick Meshtastic Device
 
+# GOME Edition!!
+
+https://ottawamesh.ca/
+
 ## Ikoka! (行こか!)
 
 “行こか?” or “行こか!” is [Kansai dialect](https://en.wikipedia.org/wiki/Kansai_dialect) for “shall we go?” or “let’s go!”.
@@ -31,12 +35,19 @@ Several options are available depending on the feature set you need.
 
 #### LoRa Module
 
-- [E22-400M22S](https://www.cdebyte.com/products/E22-400M22S) (410–493 MHz at 22 dBm)
-- [E22-400M30S](https://www.cdebyte.com/products/E22-400M30S) (410–493 MHz at 30 dBm)
-- [E22-400M33S](https://www.cdebyte.com/products/E22-400M33S) (410–493 MHz at 33 dBm)
-- [E22-900M22S](https://www.cdebyte.com/products/E22-900M22S) (850–930 MHz at 22 dBm)
-- [E22-900M30S](https://www.cdebyte.com/products/E22-900M30S) (850–930 MHz at 30 dBm)
-- [E22-900M33S](https://www.cdebyte.com/products/E22-900M33S) (850–930 MHz at 33 dBm)
+This variant uses the E22P instead of the E22.
+They are almost pin compatible except for 2 pins.
+
+Pin 6 on the E22 is `RX_EN` and is connected to `SX126X_RXEN` in firmware.
+On the E22P pin 6 is just `EN` and must be high in order to transmit or receive.
+
+This pin is tied to 3.3V from the Xiaio, but can be reconnected to Xiao's pin 6 by cutting the jumper and putting a blob of solder.
+
+Pin 7 is also technically different.
+On the E22P it is `T/R CTRL`, which sets the module to transmit or receive. High means TX, low means RX.
+This pin is connected to the radio's `DIO2` and it behaves correctly.
+
+There's a washtastic variant that does this in software, see [commit](https://github.com/yellowcooln/MeshCore-washtastic-e22p/commit/3ebd5f18f94eb0c87fe2e88f7eaa14b53440a2b4)
 
 #### Lithium-ion Battery (4.2V charging termination, optional)
 
@@ -62,6 +73,13 @@ In the interest of ease-of-assembly and keeping the XIAO module interchangeable,
 
 - Generic SSD1306 0.96" OLED display modules with 2.54mm pin headers [https://www.aliexpress.com/item/1005008077705181.html]((AliExpress))
 
+**NOTE: check the order of the pins, this variant differs from the original**
+
+ 1. GND
+ 2. 3.3V
+ 3. SCL
+ 4. SDA
+
 ## Firmware
 
 ### GPIO Assignment
@@ -73,7 +91,7 @@ In the interest of ease-of-assembly and keeping the XIAO module interchangeable,
 | 3 (D2) | EBYTE E22 - RST | 28 (P0.28) | 3 |
 | 4 (D3) | EBYTE E22 - BUSY | 29 (P0.29) | 4 |
 | 5 (D4) | EBYTE E22 - SPI NSS | 4 (P0.04) | 5 |
-| 6 (D5) | EBYTE E22 - RXEN | 5 (P0.05) | 6 |
+| 6 (D5) | FREE | 5 (P0.05) | 6 |
 | 7 (D6) | SSD1306 OLED - I2C SDA | 43 (P1.11) | 43 |
 | 8 (D7) | SSD1306 OLED - I2C SCL | 44 (P1.12) | 44 |
 | 9 (D8) | EBYTE E22 - SPI SCK | 45 (P1.13) | 7 |
